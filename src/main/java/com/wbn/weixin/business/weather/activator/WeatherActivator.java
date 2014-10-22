@@ -8,7 +8,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import com.wbn.weixin.business.weather.bean.WeatherDateMate;
 import com.wbn.weixin.business.weather.bean.WeatherItem;
 import com.wbn.weixin.business.weather.bean.WeatherRequest;
@@ -39,9 +38,10 @@ public class WeatherActivator {
 		List<WeatherDateMate> listDateMates = rtrvWeatherDateMate(doc);
 
 		WeatherResponse resp = new WeatherResponse();
+		resp.setCity(city);
 		resp.setWeatherItem(listItems);
 		resp.setWeatherDateMate(listDateMates);
-
+		
 		return resp;
 	}
 

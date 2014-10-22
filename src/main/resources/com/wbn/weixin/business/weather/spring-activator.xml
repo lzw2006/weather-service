@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="weatherActivator" class="com.wbn.weixin.business.weather.activator.WeatherActivator">
-		<property name="url"><value>http://weather1.sina.cn/</value></property>
+	<bean id="weatherActivator"
+		class="com.wbn.weixin.business.weather.activator.WeatherActivator">
+		<property name="url">
+			<value>http://weather1.sina.cn/</value>
+		</property>
+	</bean>
+
+	<bean id="storeActivator"
+		class="com.wbn.weixin.business.weather.activator.StoreActivator">
 	</bean>
 
 </beans>

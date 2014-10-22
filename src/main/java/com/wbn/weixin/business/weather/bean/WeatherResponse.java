@@ -4,8 +4,19 @@ import java.util.List;
 
 public class WeatherResponse {
 
-	List<WeatherItem> weatherItem;
-	List<WeatherDateMate> weatherDateMate;
+	private String city;
+	private List<WeatherItem> weatherItem;
+	private List<WeatherDateMate> weatherDateMate;
+
+	
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 	public List<WeatherItem> getWeatherItem() {
 		return weatherItem;

@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
 	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<import resource="spring-activator.xml"/>
+	<import resource="spring-activator.xml" />
 
 	<int:gateway default-request-channel="weatherRequestChannel"
 		default-reply-channel="weatherReplyChannel"
 		service-interface="com.wbn.weixin.business.weather.service.WeatherService" />
 
 	<int:channel id="weatherRequestChannel" />
+	<int:channel id="storeChannel" />
 	<int:channel id="weatherReplyChannel" />
+	<int:channel id="hasRecordChannel" />
+	<int:channel id="hasNoRecordChannel" />
 
-	<int:service-activator input-channel="weatherRequestChannel" output-channel="weatherReplyChannel"
+	<int:service-activator input-channel="weatherRequestChannel"
+		output-channel="storeChannel" ref="storeActivator" />
+
+	<int:payload-type-router input-channel="storeChannel" default-output-channel="weatherReplyChannel">
+		<int:mapping type="com.wbn.weixin.business.weather.bean.WeatherRequest"
+			channel="hasNoRecordChannel" />
+	</int:payload-type-router>
+
+	<int:service-activator input-channel="hasNoRecordChannel"
 		ref="weatherActivator" />
 
 </beans>
